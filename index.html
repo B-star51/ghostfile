@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GhostFile - Secure File Sharing</title>
+  
+  <!-- Import futuristic font for styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Apply base styles to all elements */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Set body layout and background */
+    body {
+      background: #f1f9ff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    /* Styling for the page header */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    /* Logo styling with hover effect */
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: #1e90ff;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 3px;
+      left: 50%;
+      bottom: -5px;
+      background: #1e90ff;
+      transition: width 0.5s ease-in-out, left 0.5s ease-in-out;
+    }
+
+    .logo:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    h2 {
+      color: #555;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    /* File selection button wrapper */
+    .file-picker {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    /* Hide default file input and apply custom styling */
+    .file-picker input[type="file"] {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .file-picker label {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #1e90ff;
+      color: #fff;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .file-picker label:hover {
+      background: #007acc;
+    }
+
+    /* Button styles for encryption and decryption */
+    .encrypt-btn, button {
+      padding: 12px 30px;
+      background: #1e90ff;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+      margin: 10px;
+    }
+
+    .encrypt-btn:hover, button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.6);
+    }
+
+    .encrypt-btn:active, button:active {
+      transform: scale(0.98);
+    }
+
+    /* Input field styles */
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      width: 280px;
+      font-size: 1rem;
+    }
+
+    /* Output container for encryption and decryption messages */
+    pre {
+      margin-top: 20px;
+      background: #ececec;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 90%;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Divider line between encryption and decryption sections */
+    hr {
+      margin: 40px 0;
+      width: 80%;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">GhostFile</div>
+    <h2>Secure File Sharing</h2>
+  </header>
+
+  <!-- Upload and Encrypt Section -->
+  <div class="file-picker">
+    <label for="fileInput">Choose your file</label>
+    <input type="file" id="fileInput" accept="*/*">
+  </div>
+
+  <div>
+    <button class="encrypt-btn" id="encryptBtn">Encrypt</button>
+  </div>
+
+  <pre id="output"></pre>
+
+  <!-- Decryption UI -->
+  <hr />
+  <h2>Decrypt File</h2>
+
+  <div class="file-picker" style="margin-bottom: 10px;">
+    <label for="encryptedFileInput">Choose Encrypted File</label>
+    <input type="file" id="encryptedFileInput" accept="*/*">
+  </div>
+
+  <input type="text" id="decryptionKey" placeholder="Enter Full Hex Key">
+
+  <div>
+    <button id="decryptBtn" class="encrypt-btn">Decrypt File</button>
+  </div>
+
+  <pre id="decryptOutput"></pre>
+
+  <!-- Load Encryption Logic -->
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>
